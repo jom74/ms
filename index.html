@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>JIMONAKJE - Codes</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family:Arial, Tahoma;
+  background:#fff;
+  color:#000;
+}
+
+/* شريط متحرك */
+.news-bar{
+  background:#005eff;
+  overflow:hidden;
+  white-space:nowrap;
+  position:fixed;
+  top:0;
+  width:100%;
+  z-index:9999;
+}
+.news-text{
+  display:inline-block;
+  padding:12px 0;
+  animation:ticker 14s linear infinite;
+  color:#fff;
+}
+@keyframes ticker{
+  0%{transform:translateX(100%)}
+  100%{transform:translateX(-100%)}
+}
+
+.main{
+  max-width:900px;
+  margin:110px auto;
+  padding:20px;
+  text-align:center;
+}
+
+h1{color:#005eff}
+
+.box{
+  background:#f2f2f2;
+  padding:20px;
+  border-radius:12px;
+  margin:25px 0;
+}
+
+input{
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border-radius:8px;
+  border:1px solid #ccc;
+  font-size:16px;
+}
+
+button{
+  background:#005eff;
+  color:#fff;
+  border:none;
+  padding:12px 30px;
+  font-size:16px;
+  border-radius:25px;
+  cursor:pointer;
+  margin-top:12px;
+}
+button:hover{background:#0045c7}
+
+.code{
+  margin-top:12px;
+  font-size:20px;
+  color:#008060;
+}
+
+/* زر القناة */
+.channel-btn{
+  background:#ff0000;
+}
+.channel-btn:hover{
+  background:#cc0000;
+}
+
+footer{
+  margin-top:40px;
+  color:#555;
+  font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="news-bar">
+  <div class="news-text">
+    🔴 تابع قناة JIMONAKJE على يوتيوب 🔴
+  </div>
+</div>
+
+<div class="main">
+
+<h1>🎮 JIMONAKJE</h1>
+<p>نظام الأكواد العشوائية</p>
+
+<!-- الاسم -->
+<div class="box">
+  <h3>👤 أدخل اسم حسابك</h3>
+  <input id="username" placeholder="اسم الحساب">
+  <button onclick="generateCode()">تأكيد</button>
+  <div class="code" id="showCode"></div>
+</div>
+
+<!-- الكود -->
+<div class="box">
+  <h3>🔐 أدخل الرمز</h3>
+  <input id="userCode" placeholder="الرمز">
+  <button onclick="sendRequest()">طلب</button>
+</div>
+
+<!-- زر القناة -->
+<a href="https://www.youtube.com/@JIMONAKJE" target="_blank">
+  <button class="channel-btn">📺 قناتنا على يوتيوب</button>
+</a>
+<a href="https://discord.gg/wfQS2FGYUu" target="_blank">
+  <button class="channel-btn"> 📍discord </button>
+</a>
+<a href="https://t.me/boost/jimonakje" target="_blank">
+  <button class="channel-btn">📺قناتنا على تلغرام</button>
+</a>
+<h1>الفائزين بالاكواد الصحيحة</h1>
+<h2>ROZNE_04 ==28ROBOX</h2>
+<h2>RipShadow2044 ==16ROBOX</h2>
+<h2>ubr_26 ==52ROBOX</h2>
+<h2>floK7A ==50ROBOX</h2>
+<h2>AMINE_854 ==33ROBOX</h2>
+<h2>TRA_rez ==84ROBOX</h2>
+<h2>mohammed_pc ==20ROBOX</h2>
+<footer>© 2026 JIMONAKJE</footer>
+<H3>اي مشكل ارسل الى داالايميل [gomopit@gmail.com]</H3>
+
+</div>
+
+<script>
+const WEBHOOK = "https://discordapp.com/api/webhooks/1463531407124070402/L1IIUunhhJgJsNGGf7DnyU6NJtSdmliL52CI-UqJwS6X3uQNNQzw_Gf6oUx3S8lR3AVh";
+
+let generatedCode = "";
+
+function sendToDiscord(message){
+  fetch(WEBHOOK,{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({content:message})
+  });
+}
+
+function generateCode(){
+  const name = document.getElementById("username").value.trim();
+  if(!name){
+    alert("❌ لازم تكتب اسم الحساب");
+    return;
+  }
+
+  generatedCode = Math.floor(10000000 + Math.random()*90000000);
+  document.getElementById("showCode").innerText =
+    "🔐 الرمز الخاص بك: " + generatedCode;
+}
+
+function sendRequest(){
+  const name = document.getElementById("username").value.trim();
+  const entered = document.getElementById("userCode").value.trim();
+
+  if(!name){
+    alert("❌ اكتب اسم الحساب");
+    return;
+  }
+  if(!generatedCode){
+    alert("❌ اضغط تأكيد أولاً");
+    return;
+  }
+  if(!entered){
+    alert("❌ اكتب الرمز");
+    return;
+  }
+
+  if(entered == generatedCode){
+    sendToDiscord(
+`🟢 طلب جديد
+👤 ${name}
+🔐 ${entered}`
+    );
+    alert("✅ تم إرسال الطلب");
+  }else{
+    alert("❌ الرمز غير صحيح");
+  }
+}
+</script>
+
+</body>
+</html>
