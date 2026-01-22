@@ -9,13 +9,14 @@
 body{
   margin:0;
   font-family:Arial, Tahoma;
-  background:#fff;
+  background:#f7f9fc;
   color:#000;
+  padding-top:70px;
 }
 
-/* شريط متحرك */
+/* شريط علوي */
 .news-bar{
-  background:#005eff;
+  background:#000;
   overflow:hidden;
   white-space:nowrap;
   position:fixed;
@@ -34,20 +35,21 @@ body{
   100%{transform:translateX(-100%)}
 }
 
-.main{
-  max-width:900px;
-  margin:110px auto;
-  padding:20px;
-  text-align:center;
+/* التخطيط */
+.main{padding:20px}
+.layout{
+  display:grid;
+  grid-template-columns:1fr 1.4fr 1fr;
+  gap:20px;
 }
 
-h1{color:#005eff}
-
-.box{
-  background:#f2f2f2;
-  padding:20px;
-  border-radius:12px;
-  margin:25px 0;
+/* الصناديق */
+.box,.left,.roblox-box{
+  background:#fff;
+  padding:16px;
+  border-radius:16px;
+  box-shadow:0 8px 20px rgba(0,0,0,.08);
+  margin-bottom:20px;
 }
 
 input{
@@ -60,10 +62,11 @@ input{
 }
 
 button{
+  width:100%;
   background:#005eff;
   color:#fff;
   border:none;
-  padding:12px 30px;
+  padding:12px;
   font-size:16px;
   border-radius:25px;
   cursor:pointer;
@@ -71,24 +74,91 @@ button{
 }
 button:hover{background:#0045c7}
 
-.code{
-  margin-top:12px;
-  font-size:20px;
-  color:#008060;
+.code{margin-top:12px;font-size:18px;color:#008060}
+
+/* اليسار */
+.left h2{color:#005eff}
+.left h3{color:#008060;font-size:15px}
+
+/* الأزرار */
+.channel-btn{background:#e20606}
+.sot-btn{background:#5865F2}
+.not-btn{background:#2AABEE}
+
+/* PayPal */
+.paypal-pro{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:14px;
+  background:linear-gradient(135deg,#0070ba,#003087);
+  color:#fff;
+  text-decoration:none;
+  border-radius:16px;
+  font-weight:bold;
+  margin-top:15px;
 }
 
-/* زر القناة */
-.channel-btn{
-  background:#ff0000;
+/* Roblox (تم التصغير هنا) */
+.roblox-box{
+  text-align:center;
+  padding:12px;
 }
-.channel-btn:hover{
-  background:#cc0000;
+
+.roblox-avatar{
+  width:100%;
+  max-width:180px;
+  height:auto;
+  border-radius:16px;
+  margin:10px auto 0;
+  object-fit:contain;
+  display:block;
+}
+
+/* إعلان HP */
+.hp-bar{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  background:#0b5ed7;
+  overflow:hidden;
+  z-index:9999;
+  text-decoration:none;
+}
+.hp-track{
+  display:flex;
+  width:max-content;
+  animation:hp-scroll 18s linear infinite;
+}
+.hp-content{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  padding:12px 30px;
+  color:#fff;
+  font-weight:bold;
+  white-space:nowrap;
+}
+.hp-content img{
+  height:26px;
+  filter:brightness(0) invert(1);
+}
+@keyframes hp-scroll{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-50%)}
 }
 
 footer{
-  margin-top:40px;
-  color:#555;
-  font-size:14px;
+  text-align:center;
+  color:#dd0808;
+  margin:40px 0 130px;
+}
+
+/* ✅ استجابة للشاشات الصغيرة */
+@media (max-width:1100px){
+  .layout{
+    grid-template-columns:1fr;
+  }
 }
 </style>
 </head>
@@ -96,106 +166,112 @@ footer{
 <body>
 
 <div class="news-bar">
-  <div class="news-text">
-    🔴 تابع قناة JIMONAKJE على يوتيوب 🔴
-  </div>
+  <div class="news-text">🔴 تابع قناة JIMONAKJE على يوتيوب 🔴</div>
 </div>
+
+<h1 style="text-align:center;color:#005eff">🎮 JIMONAKJE</h1>
+<h3 style="text-align:center">YouTube Subscribers [0]</h3>
 
 <div class="main">
+<div class="layout">
 
-<h1>🎮 JIMONAKJE</h1>
-<p>نظام الأكواد العشوائية</p>
+<!-- اليسار -->
+<div class="left">
+<h2>🏆 الفائزين بالأكواد</h2>
+<h3>ROZNE_04 == 28ROBOX</h3>
+<h3>RipShadow2044 == 16ROBOX</h3>
+<h3>ubr_26 == 52ROBOX</h3>
+<h3>floK7A == 50ROBOX</h3>
+<h3>AMINE_854 == 33ROBOX</h3>
+<h3>TRA_rez == 84ROBOX</h3>
+<h3>mohammed_pc == 20ROBOX</h3>
+</div>
 
-<!-- الاسم -->
+<!-- الوسط -->
+<div>
 <div class="box">
-  <h3>👤 أدخل اسم حسابك</h3>
-  <input id="username" placeholder="اسم الحساب">
-  <button onclick="generateCode()">تأكيد</button>
-  <div class="code" id="showCode"></div>
+<h3>👤 أدخل اسم حسابك</h3>
+<input id="username" placeholder="اسم الحساب">
+<button onclick="generateCode()">تأكيد</button>
+<div class="code" id="showCode"></div>
 </div>
 
-<!-- الكود -->
 <div class="box">
-  <h3>🔐 أدخل الرمز</h3>
-  <input id="userCode" placeholder="الرمز">
-  <button onclick="sendRequest()">طلب</button>
+<h3>🔐 أدخل الرمز</h3>
+<input id="userCode" placeholder="الرمز">
+<button onclick="sendRequest()">طلب</button>
+</div>
 </div>
 
-<!-- زر القناة -->
-<a href="https://www.youtube.com/@JIMONAKJE" target="_blank">
-  <button class="channel-btn">📺 قناتنا على يوتيوب</button>
-</a>
-<a href="https://discord.gg/wfQS2FGYUu" target="_blank">
-  <button class="channel-btn"> 📍discord </button>
-</a>
-<a href="https://t.me/boost/jimonakje" target="_blank">
-  <button class="channel-btn">📺قناتنا على تلغرام</button>
-</a>
-<h1>الفائزين بالاكواد الصحيحة</h1>
-<h2>ROZNE_04 ==28ROBOX</h2>
-<h2>RipShadow2044 ==16ROBOX</h2>
-<h2>ubr_26 ==52ROBOX</h2>
-<h2>floK7A ==50ROBOX</h2>
-<h2>AMINE_854 ==33ROBOX</h2>
-<h2>TRA_rez ==84ROBOX</h2>
-<h2>mohammed_pc ==20ROBOX</h2>
-<footer>© 2026 JIMONAKJE</footer>
-<H3>اي مشكل ارسل الى داالايميل [gomopit@gmail.com]</H3>
+<!-- اليمين -->
+<div>
+<a href="https://www.youtube.com/@JIMONAKJE" target="_blank"><button class="channel-btn">📺 يوتيوب</button></a>
+<a href="https://discord.gg/wfQS2FGYUu" target="_blank"><button class="sot-btn">📍 ديسكورد</button></a>
+<a href="https://t.me/boost/jimonakje" target="_blank"><button class="not-btn">📈 تلغرام</button></a>
 
+<a href="https://paypal.me/mjimonakje" target="_blank" class="paypal-pro">💳 دعم عبر PayPal</a>
+
+<div class="roblox-box">
+<h4>🎮 Roblox</h4>
+<strong>mohammed_amine95</strong>
+<a href="https://www.roblox.com/users/8565608474/profile" target="_blank">
+<img class="roblox-avatar"
+src="m.png">
+</a>
 </div>
+
+<div class="roblox-box">
+<h4>🎮 Roblox</h4>
+<strong>trast_004</strong>
+<a href="https://www.roblox.com/search/users?keyword=trast_004" target="_blank">
+<img class="roblox-avatar"
+src="t.png">
+</a>
+</div>
+</div>
+
+<footer>
+© 2026 JIMONAKJE<br>
+أي مشكل:ارسل الى gomopit@gmail.com
+</footer>
+</div>
+
+<a href="https://www.hp.com" target="_blank" class="hp-bar">
+<div class="hp-track">
+<div class="hp-content">
+<img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/HP_logo_2012.svg">
+<span>إعلان HP — أقوى الحواسيب للألعاب والعمل | HP Gaming & Pro Laptops </span>
+</div>
+<div class="hp-content">
+<img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/HP_logo_2012.svg">
+<span>إعلان HP — أقوى الحواسيب للألعاب والعمل | HP Gaming & Pro Laptops </span>
+</div>
+</div>
+</a>
 
 <script>
-const WEBHOOK = "https://discordapp.com/api/webhooks/1463531407124070402/L1IIUunhhJgJsNGGf7DnyU6NJtSdmliL52CI-UqJwS6X3uQNNQzw_Gf6oUx3S8lR3AVh";
-
-let generatedCode = "";
+const WEBHOOK="https://discordapp.com/api/webhooks/1463531407124070402/L1IIUunhhJgJsNGGf7DnyU6NJtSdmliL52CI-UqJwS6X3uQNNQzw_Gf6oUx3S8lR3AVh";
+let generatedCode="";
 
 function sendToDiscord(message){
-  fetch(WEBHOOK,{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({content:message})
-  });
+fetch(WEBHOOK,{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({content:message})
+});
 }
-
 function generateCode(){
-  const name = document.getElementById("username").value.trim();
-  if(!name){
-    alert("❌ لازم تكتب اسم الحساب");
-    return;
-  }
-
-  generatedCode = Math.floor(10000000 + Math.random()*90000000);
-  document.getElementById("showCode").innerText =
-    "🔐 الرمز الخاص بك: " + generatedCode;
+if(!username.value.trim()){alert("❌ لازم تكتب اسم الحساب");return;}
+generatedCode=Math.floor(10000000+Math.random()*90000000);
+showCode.innerText="🔐 الرمز الخاص بك: "+generatedCode;
 }
-
 function sendRequest(){
-  const name = document.getElementById("username").value.trim();
-  const entered = document.getElementById("userCode").value.trim();
-
-  if(!name){
-    alert("❌ اكتب اسم الحساب");
-    return;
-  }
-  if(!generatedCode){
-    alert("❌ اضغط تأكيد أولاً");
-    return;
-  }
-  if(!entered){
-    alert("❌ اكتب الرمز");
-    return;
-  }
-
-  if(entered == generatedCode){
-    sendToDiscord(
-`🟢 طلب جديد
-👤 ${name}
-🔐 ${entered}`
-    );
-    alert("✅ تم إرسال الطلب");
-  }else{
-    alert("❌ الرمز غير صحيح");
-  }
+if(userCode.value.trim()==generatedCode){
+sendToDiscord(`🟢 طلب جديد\n👤 ${username.value}\n🔐 ${userCode.value}`);
+alert("✅ تم إرسال الطلب");
+}else{
+alert("❌ الرمز غير صحيح");
+}
 }
 </script>
 
